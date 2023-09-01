@@ -52,15 +52,7 @@ jobs:
            path: |
              build/app/outputs/flutter-apk/app-release.apk
 
-         #8 create release with those builds
-       - name: Create Android Release
-         uses: ncipollo/release-action@v1
-         with:
-           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
-           tag: v1.0.${{ github.run_number }}
-           token: ${{ secrets.TOKEN }}
-
-         #9 Build IPA
+         #8 Build IPA
        - name: Build IPA
          run:
           flutter build ipa --no-codesign
@@ -69,7 +61,7 @@ jobs:
            cd build
            tar -czf ios_build.tar.gz ios
            
-         #10 get those build to be available to download
+         #9 get those build to be available to download
        - name: Upload iOS Artifacts
          uses: actions/upload-artifact@v2
          with:
@@ -77,11 +69,11 @@ jobs:
             path: |
              build/ios_build.tar.gz
 
-         #11 create release with those builds
+         #10 create release with those builds
        - name: Create iOS Release
          uses: ncipollo/release-action@v1
          with:
-          artifacts: "build/ios_build.tar.gz"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/ios_build.tar.gz"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
 
