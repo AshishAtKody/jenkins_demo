@@ -40,15 +40,27 @@ jobs:
        - name: Test flutter app
          run: flutter test
 
-         #6 build apk
-       - name: Build APK
+         #6 build Android apk
+       - name: Build Android APK
          run: flutter build apk --release
 
-         #7 build aab
-       - name: Build APK
-         run: flutter build appbundle
+         #7 get those build to be available to download
+       - name: Upload Artifacts
+         uses: actions/upload-artifact@v2
+         with:
+           name: Releases
+           path: |
+             build/app/outputs/flutter-apk/app-release.apk
 
-         #8 Build IPA
+         #8 create release with those builds
+       - name: Create Android Release
+         uses: ncipollo/release-action@v1
+         with:
+           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
+           tag: v1.0.${{ github.run_number }}
+           token: ${{ secrets.TOKEN }}
+
+         #9 Build IPA
        - name: Build IPA
          run:
           flutter build ipa --no-codesign
@@ -57,21 +69,19 @@ jobs:
            cd build
            tar -czf ios_build.tar.gz ios
            
-         #9 get those build to be available to download
-       - name: Upload Artifacts
+         #10 get those build to be available to download
+       - name: Upload iOS Artifacts
          uses: actions/upload-artifact@v2
          with:
             name: Releases
             path: |
-             build/app/outputs/flutter-apk/app-release.apk
-             build/app/outputs/bundle/release/app-release.aab
              build/ios_build.tar.gz
 
-         #10 create release with those builds
-       - name: Create Release
+         #11 create release with those builds
+       - name: Create iOS Release
          uses: ncipollo/release-action@v1
          with:
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz"
+          artifacts: "build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
 
