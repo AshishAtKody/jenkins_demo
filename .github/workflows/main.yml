@@ -70,12 +70,20 @@ jobs:
              build/ios_build.tar.gz
 
          #10 create release with those builds
-       - name: Create iOS Release
+       - name: Create Release
          uses: ncipollo/release-action@v1
          with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/ios_build.tar.gz"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
 
-
+       - name: upload artefact to App Center
+         uses: projects_test/AppCenter-Github-Action@v1
+         with:
+          appName: projects_test/Jenkins-Demo
+          token: ${{secrets.APP_CENTER_TOKEN}}
+          group: tester
+          file: build/app/outputs/flutter-apk/app-release.apk
+          notifyTesters: true
+          debug: false
 
