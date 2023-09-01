@@ -6,7 +6,7 @@ on:
 
   push:
      branches:
-       -uat
+       - uat
 
 jobs:
   build:
