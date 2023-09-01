@@ -52,28 +52,28 @@ jobs:
            path: |
              build/app/outputs/flutter-apk/app-release.apk
 
-         #8 Build IPA
-       - name: Build IPA
-         run:
-          flutter build ipa --no-codesign
-       - name: Compress archive and IPAs
-         run: |
-           cd build
-           tar -czf ios_build.tar.gz ios
-           
-         #9 get those build to be available to download
-       - name: Upload iOS Artifacts
-         uses: actions/upload-artifact@v2
-         with:
-            name: Releases
-            path: |
-             build/ios_build.tar.gz
+#         #8 Build IPA
+#       - name: Build IPA
+#         run:
+#          flutter build ipa --no-codesign
+#       - name: Compress archive and IPAs
+#         run: |
+#           cd build
+#           tar -czf ios_build.tar.gz ios
+#
+#         #9 get those build to be available to download
+#       - name: Upload iOS Artifacts
+#         uses: actions/upload-artifact@v2
+#         with:
+#            name: Releases
+#            path: |
+#             build/ios_build.tar.gz
 
          #10 create release with those builds
        - name: Create Release
          uses: ncipollo/release-action@v1
          with:
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/ios_build.tar.gz"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk" #,build/ios_build.tar.gz
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
 
