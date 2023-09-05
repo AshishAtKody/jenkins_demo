@@ -18,6 +18,9 @@ jobs:
        - name: Checkout Repository
          uses: actions/checkout@v3
 
+       - name: setup python
+         uses: actions/setup-python@v3
+
          #2 Setup Java
        - name: Set up Java
          uses: actions/setup-java@v3.12.0
