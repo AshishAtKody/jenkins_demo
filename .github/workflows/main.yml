@@ -16,10 +16,7 @@ jobs:
     steps:
          #1 Checkout Repository
        - name: Checkout Repository
-         uses: actions/checkout@v3
-
-       - name: setup python
-         uses: actions/setup-python@v3
+         uses: actions/checkout@v4
 
          #2 Setup Java
        - name: Set up Java
