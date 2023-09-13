@@ -14,10 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #1 Checkout Repository
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
         #2 Setup Java
       - name: Set up Java
         uses: actions/setup-java@v1
@@ -25,7 +21,7 @@ jobs:
           java-version: 1.8
 
       - name: install gradle
-        run: brew gradle install
+        run: sudo apt install snapd -y && sudo snap install gradle --classic &&
 
       - name: Make gradlew executable
         run: chmod +x gradlew
@@ -35,6 +31,10 @@ jobs:
         with:
           flutter-version: '3.13.0'
           channel: 'stable'
+
+      #1 Checkout Repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
         #4 Install dependencies
       - name: Install dependencies
