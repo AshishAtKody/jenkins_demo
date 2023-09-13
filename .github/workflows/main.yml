@@ -21,7 +21,10 @@ jobs:
           java-version: 1.8
 
       - name: install gradle
-        run: sudo apt install snapd -y && sudo snap install gradle --classic &&
+        run: sudo apt install snapd -y
+
+      - name: install gradle
+        run: sudo snap install gradle --classic
 
       - name: Make gradlew executable
         run: chmod +x gradlew
