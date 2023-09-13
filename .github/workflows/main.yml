@@ -47,8 +47,11 @@ jobs:
           mkdir "${TMP_KEYSTORE_FILE_PATH}"
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/jenkins_demo.jks
 
+#      - name: install gradle
+#        run: brew gradle install
+#
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x gradlew
 
       - name: build prod
         run: ./gradlew app:bundleRelease
