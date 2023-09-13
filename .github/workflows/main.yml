@@ -14,21 +14,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-        #2 Setup Java
+      #2 Setup Java
       - name: Set up Java
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
 
       - name: install gradle
-        run: sudo apt install snapd -y
-
+        run: wget -c https://services.gradle.org/distributions/gradle-7.4.2-bin.zip -P /tmp
       - name: install gradle
-        run: sudo snap install gradle --classic
-
-      - name: Make gradlew executable
+        run: sudo unzip -d /opt/gradle /tmp/gradle-7.4.2-bin.zip
+      - name: install gradle
+        run: sudo nano /etc/profile.d/gradle.sh
+      - name: install gradle
+        run: export GRADLE_HOME=/opt/gradle/gradle-7.4.2
+      - name: install gradle
+        run: export PATH=${GRADLE_HOME}/bin:${PATH}
+      - name: install gradle
+        run: sudo chmod +x /etc/profile.d/gradle.sh
+      - name: install gradle
+        run: source /etc/profile.d/gradle.sh
+      - name: install gradle
         run: gradle --version
-#        run: chmod +x /etc/profile.d/gradle.sh
+
+        #        run: chmod +x /etc/profile.d/gradle.sh
         #3 Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -56,8 +65,8 @@ jobs:
           mkdir "${TMP_KEYSTORE_FILE_PATH}"
           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/jenkins_demo.jks
 
-#
-#
+      #
+      #
 
 
       - name: build prod
