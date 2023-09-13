@@ -26,6 +26,7 @@ jobs:
         run: ./gradlew build
 
 
+
         #        run: chmod +x /etc/profile.d/gradle.sh
         #3 Set up Flutter
       - name: Set up Flutter
