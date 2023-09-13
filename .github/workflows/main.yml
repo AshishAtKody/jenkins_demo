@@ -27,7 +27,8 @@ jobs:
         run: sudo snap install gradle --classic
 
       - name: Make gradlew executable
-        run: chmod +x /etc/profile.d/gradle.sh
+        run: gradle --version
+#        run: chmod +x /etc/profile.d/gradle.sh
         #3 Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
