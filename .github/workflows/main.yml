@@ -25,7 +25,7 @@ jobs:
 
       - name: setup gradle init
         run: gradle init
-        
+
       - name: setup gradle wrapper
         run: gradle wrapper
 
@@ -62,7 +62,7 @@ jobs:
 
 
       - name: build prod
-        run: ./gradlew app:bundleRelease
+        run: gradlew app:bundleRelease
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
