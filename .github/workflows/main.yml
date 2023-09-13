@@ -22,12 +22,9 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+      - name: Run build with Gradle Wrapper
+        run: ./gradlew build
 
-      - name: setup gradle init
-        run: gradle init
-
-      - name: setup gradle wrapper
-        run: gradle wrapper
 
         #        run: chmod +x /etc/profile.d/gradle.sh
         #3 Set up Flutter
